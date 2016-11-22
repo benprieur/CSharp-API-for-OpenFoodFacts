@@ -44,12 +44,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EnumerationCountries.cs" />
-    <Compile Include="EnumerationTags.cs" />
-    <Compile Include="EnumerationLanguages.cs" />
-    <Compile Include="OpenFoodFactsProduct.cs" />
+    <Compile Include="Facets.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="OpenFoodFactsRequest.cs" />
+    <Compile Include="Product.cs" />
+    <Compile Include="Utils.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

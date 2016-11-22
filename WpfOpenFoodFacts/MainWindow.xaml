@@ -7,19 +7,19 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
 
-    <Window.Resources>
-        <CollectionViewSource x:Key="ItemCollectionViewSource" CollectionViewType="ListCollectionView"/>
-    </Window.Resources>
-
     <Grid VerticalAlignment="Top">
-        <StackPanel VerticalAlignment="Top">
-            
-            <Button Content="Test" Width="100" Height="25" Click="Button_Click" />
+        <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left" Margin="5">
 
-            <DataGrid
-                  DataContext="{StaticResource ItemCollectionViewSource}"
-                  ItemsSource="{Binding}"
-                  AutoGenerateColumns="True" />
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <TextBox Width="150" 
+                     Height="25" 
+                     Text="3596710304578"
+                     Name="Barcode" />
+                <Button Content="Bar code" 
+                    Width="100" 
+                    Height="25" 
+                    Click="get_product_Click" />
+            </StackPanel>
 
         </StackPanel>
     </Grid>
