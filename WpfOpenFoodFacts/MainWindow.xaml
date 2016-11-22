@@ -21,6 +21,12 @@
                     Click="get_product_Click" />
             </StackPanel>
 
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <Button Content="Facets" 
+                    Width="100" 
+                    Height="25" 
+                    Click="get_by_facets_Click" />
+            </StackPanel>
         </StackPanel>
     </Grid>
 </Window>

@@ -10,6 +10,8 @@ namespace OpenFoodFactsAPI
         public const string API_URL = "http://world.openfoodfacts.org/";
         public const string JSON_EXTENSION = ".json";
         public const string APP_JSON = "application/json";
+        public const string PRODUCT_TAG = "product";
+        public const string PRODUCTS_TAG = "products";
 
         /// <summary>
         /// fetch
