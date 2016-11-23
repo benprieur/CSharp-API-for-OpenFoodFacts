@@ -8,25 +8,77 @@
         Title="MainWindow" Height="350" Width="525">
 
     <Grid VerticalAlignment="Top">
-        <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left" Margin="5">
 
-            <StackPanel Orientation="Horizontal" Margin="5">
-                <TextBox Width="150" 
-                     Height="25" 
+        <StackPanel VerticalAlignment="Top" 
+                    HorizontalAlignment="Left" 
+                    Orientation="Vertical"
+                    Margin="5">
+
+            <StackPanel Orientation="Horizontal" 
+                        Margin="5">
+                <TextBox Width="120" 
+                     Height="25"
+                     Margin="5"    
                      Text="3596710304578"
                      Name="Barcode" />
-                <Button Content="Bar code" 
-                    Width="100" 
+                <Button Content="Recherche par code-barre" 
+                    Width="200" 
                     Height="25" 
+                    Margin="5"
                     Click="get_product_Click" />
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="5">
-                <Button Content="Facets" 
-                    Width="100" 
+                <Button Content="Recherche par critères" 
+                    Width="200" 
                     Height="25" 
+                    Margin="5"
                     Click="get_by_facets_Click" />
             </StackPanel>
+
+            <ListBox ItemsSource="{Binding Products}"
+                     Width="600"
+                     Height="750"
+                     ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                     ScrollViewer.VerticalScrollBarVisibility="Auto"  
+                     Margin="5"
+                     Background="#ecf0f1">
+
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+
+                            <Image 
+                                Width="50"
+                                Margin="5"
+                                Source="{Binding Image_thumb_url}"/>
+
+                            <StackPanel Orientation="Vertical">
+
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Créateur :" 
+                                               FontWeight="Bold" 
+                                               Margin="5"
+                                               Width="80" />
+                                    <TextBlock Text="{Binding Creator}"
+                                               Margin="5" />
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Informateurs :" 
+                                               FontWeight="Bold" 
+                                               Margin="5"
+                                               Width="80" />
+                                    <TextBlock Text="{Binding Informers_tags}"
+                                               Margin="5" />
+                                </StackPanel>
+                            </StackPanel>
+
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
         </StackPanel>
     </Grid>
 </Window>

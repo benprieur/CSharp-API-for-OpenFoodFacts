@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Dynamic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -80,8 +82,9 @@ namespace OpenFoodFactsAPI
         public int __invalid_name__en_french { get; set; }
     }
 
-    public class Product
+    public class Product : DynamicObject, INotifyPropertyChanged
     {
+        /*
         public List<string> categories_tags { get; set; }
         public List<string> packaging_tags { get; set; }
         public List<object> countries_debug_tags { get; set; }
@@ -105,11 +108,39 @@ namespace OpenFoodFactsAPI
         public int ingredients_from_palm_oil_n { get; set; }
         public List<string> languages_hierarchy { get; set; }
         public int completed_t { get; set; }
-        public string image_thumb_url { get; set; }
+        */
+        protected string image_thumb_url;
+        public string Image_thumb_url
+        {
+            get
+            {
+                return image_thumb_url;
+            }
+            set
+            {
+                image_thumb_url = value;
+                OnPropertyChanged("Image_thumb_url");
+            }
+        }
+        /*
         public List<string> brands_tags { get; set; }
         public List<object> checkers_tags { get; set; }
         public int complete { get; set; }
-        public string creator { get; set; }
+        */
+        protected string m_creator;
+        public string Creator
+        {
+            get
+            {
+                return m_creator;
+            }
+            set
+            {
+                m_creator = value;
+                OnPropertyChanged("Creator");
+            }
+        }
+        /*
         public string ingredients_text { get; set; }
         public List<string> additives_old_tags { get; set; }
         public string product_name { get; set; }
@@ -142,7 +173,7 @@ namespace OpenFoodFactsAPI
         public List<string> ingredients_n_tags { get; set; }
         public List<string> additives_debug_tags { get; set; }
         public string lang { get; set; }
-        public int __invalid_name__fruits_vegetables_nuts_100g_estimate { get; set; }
+        public int fruits_vegetables_nuts_100g_estimate { get; set; }
         public NutrientLevels nutrient_levels { get; set; }
         public List<string> pnns_groups_2_tags { get; set; }
         public string last_editor { get; set; }
@@ -237,7 +268,29 @@ namespace OpenFoodFactsAPI
         public List<object> labels_debug_tags { get; set; }
         public List<string> stores_tags { get; set; }
         public Languages languages { get; set; }
-        public List<string> informers_tags { get; set; }
+        */
+        protected string informers_tags;
+        public string Informers_tags
+        {
+            get
+            {
+                return informers_tags;
+            }
+            set
+            {
+                informers_tags = value;
+                OnPropertyChanged("Informers_tags");
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            if (this.PropertyChanged != null)
+            {
+                this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
     }
 
     public class RootObject

@@ -24,6 +24,27 @@ namespace OpenFoodFactsAPI
         }
 
         /// <summary>
+        /// Deserialize
+        /// </summary>
+        /// <param name="jtoken"></param>
+        /// <returns></returns>
+        public Product Deserialize(JToken jtoken)
+        {
+            Product product = new Product();
+
+            // creator
+            product.Creator = (string)jtoken["creator"];
+
+            // image_thumb_url
+            product.Image_thumb_url = (string)jtoken["image_thumb_url"];
+
+            // informers_tags
+            product.Informers_tags = string.Join(", ", jtoken["informers_tags"].Values());
+
+            return product;
+        }
+
+        /// <summary>
         /// get_product_deserialize
         /// </summary>
         /// <param name="query"></param>
@@ -33,7 +54,7 @@ namespace OpenFoodFactsAPI
             string json = get_product(barcode);
             var jObject = JObject.Parse(json);
             JToken jtoken = jObject[PRODUCT_TAG];
-            return JsonConvert.DeserializeObject<Product>(jtoken.ToString());
+            return Deserialize(jtoken);
         }
 
         /// <summary>
@@ -73,7 +94,7 @@ namespace OpenFoodFactsAPI
             List<Product> products = new List<Product>();
             foreach(JToken jtoken in jtokens)
             {
-                Product product = JsonConvert.DeserializeObject<Product>(jtoken.ToString());
+                Product product = Deserialize(jtoken);
                 products.Add(product);   
             }
 
