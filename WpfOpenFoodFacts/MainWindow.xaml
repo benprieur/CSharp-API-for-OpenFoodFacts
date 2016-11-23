@@ -4,45 +4,146 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfOpenFoodFacts"
+        xmlns:toolkit="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Input.Toolkit"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Background="#bdc3c7"
+        Title="Client lourd de test" Height="350" Width="525">
+
+    <Window.Resources>
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="WhiteSmoke" />
+            <Setter Property="Foreground" Value="#2c3e50" />
+            <Setter Property="SnapsToDevicePixels" Value="True" />
+        </Style>
+    </Window.Resources>
 
     <Grid VerticalAlignment="Top">
 
         <StackPanel VerticalAlignment="Top" 
-                    HorizontalAlignment="Left" 
+                    HorizontalAlignment="Center" 
+                    Width="800"
                     Orientation="Vertical"
-                    Margin="5">
+                    Margin="2">
 
-            <StackPanel Orientation="Horizontal" 
-                        Margin="5">
-                <TextBox Width="120" 
-                     Height="25"
-                     Margin="5"    
-                     Text="3596710304578"
-                     Name="Barcode" />
-                <Button Content="Recherche par code-barre" 
-                    Width="200" 
-                    Height="25" 
-                    Margin="5"
-                    Click="get_product_Click" />
-            </StackPanel>
+            <Border BorderBrush="#FF000000"
+                    Background="#2c3e50" 
+                    BorderThickness="1,1,1,1"
+                    CornerRadius="8,8,8,8"
+                    Margin="2,2,2,2">
 
-            <StackPanel Orientation="Horizontal" Margin="5">
-                <Button Content="Recherche par critères" 
-                    Width="200" 
-                    Height="25" 
-                    Margin="5"
-                    Click="get_by_facets_Click" />
-            </StackPanel>
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal" 
+                            Margin="2">
+
+                        <TextBox 
+                             Margin="2"    
+                             Width="100" 
+                             Text="3596710304578"
+                             Name="Barcode" />
+                        <Button Content="By barcode" 
+                            Margin="2"
+                            Width="120"
+                            Click="get_product_Click" />
+                    </StackPanel>
+
+                    <WrapPanel Orientation="Horizontal" 
+                               Margin="2" >
+
+                        <TextBlock Text="Brand?"
+                                   Foreground="White"
+                                   Margin="2"/>
+
+                        <toolkit:AutoCompleteBox x:Name="autoCompleteBoxBrand"        
+                                                 Width="150"
+                                                 Margin="2"
+                                                 FilterMode="Contains"              
+                                                 IsTextCompletionEnabled="True"
+                                                 ValueMemberPath="name"       
+                                                 ItemsSource="{Binding Brands}"
+                                                 SelectedItem="{Binding Brand, Mode=TwoWay}">
+                            <toolkit:AutoCompleteBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding name}"></TextBlock>
+                                </DataTemplate>
+                            </toolkit:AutoCompleteBox.ItemTemplate>
+                        </toolkit:AutoCompleteBox>
+
+                        <TextBlock Text="Country?"
+                                   Foreground="White"
+                                   Margin="2"/>
+
+                        <toolkit:AutoCompleteBox x:Name="autoCompleteBoxCountry"        
+                                                 Width="150"
+                                                 Margin="2"
+                                                 FilterMode="Contains"              
+                                                 IsTextCompletionEnabled="True"
+                                                 ValueMemberPath="name"       
+                                                 ItemsSource="{Binding Countries}"
+                                                 SelectedItem="{Binding Country, Mode=TwoWay}">
+                            <toolkit:AutoCompleteBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding name}"></TextBlock>
+                                </DataTemplate>
+                            </toolkit:AutoCompleteBox.ItemTemplate>
+                        </toolkit:AutoCompleteBox>
+
+                        <TextBlock Text="Informer?"
+                                   Foreground="White"
+                                   Margin="2"/>
+
+                        <toolkit:AutoCompleteBox x:Name="autoCompleteBoxInformer"        
+                                                 Width="150"
+                                                 Margin="2"
+                                                 FilterMode="Contains"              
+                                                 IsTextCompletionEnabled="True"
+                                                 ValueMemberPath="name"       
+                                                 ItemsSource="{Binding Informers}"
+                                                 SelectedItem="{Binding Informer, Mode=TwoWay}">
+                            <toolkit:AutoCompleteBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding name}"></TextBlock>
+                                </DataTemplate>
+                            </toolkit:AutoCompleteBox.ItemTemplate>
+                        </toolkit:AutoCompleteBox>
+
+                        <Button Content="By criteria"
+                            Width="100"    
+                            Margin="2"
+                            Click="get_by_facets_Click" />
+                    </WrapPanel>
+
+                    <Border BorderBrush="#2c3e50"
+                        Background="WhiteSmoke" 
+                        BorderThickness="3,3,3,3"
+                        CornerRadius="8,8,8,8"
+                        Margin="2,2,2,2">
+
+                        <StackPanel Orientation="Horizontal" Margin="2">
+                            <TextBlock Text="Current page:"
+                                   Foreground="#2c3e50"
+                                   Margin="2"/>
+                            <TextBlock Text="{Binding Page}" Margin="2" />
+                            <TextBlock Text="Page size:"
+                                   Foreground="#2c3e50"
+                                   Margin="2"/>
+                            <TextBlock Text="{Binding Page_Size}" Margin="2" />
+                            <TextBlock Text="Count:"
+                                   Foreground="#2c3e50"
+                                   Margin="2"/>
+                            <TextBlock Text="{Binding Count}" Margin="2" />
+                        </StackPanel>
+
+                    </Border>
+                </StackPanel>
+            </Border>
 
             <ListBox ItemsSource="{Binding Products}"
-                     Width="600"
-                     Height="750"
+                     BorderBrush="#c0392b"
+                     BorderThickness="3,3,3,3"
+                     Height="600"
                      ScrollViewer.HorizontalScrollBarVisibility="Auto"
-                     ScrollViewer.VerticalScrollBarVisibility="Auto"  
-                     Margin="5"
-                     Background="#ecf0f1">
+                     ScrollViewer.VerticalScrollBarVisibility="Visible"  
+                     Margin="2">
 
                 <ListBox.ItemTemplate>
                     <DataTemplate>
@@ -50,30 +151,44 @@
 
                             <Image 
                                 Width="50"
-                                Margin="5"
+                                Margin="2"
                                 Source="{Binding Image_thumb_url}"/>
 
                             <StackPanel Orientation="Vertical">
 
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="Créateur :" 
-                                               FontWeight="Bold" 
-                                               Margin="5"
-                                               Width="80" />
-                                    <TextBlock Text="{Binding Creator}"
-                                               Margin="5" />
+
+                                    <TextBlock Text="{Binding Product_name}"
+                                           Foreground="#2c3e50"
+                                           FontWeight="Bold"
+                                           Margin="2" />
+                                    <TextBlock Text="{Binding Id}"
+                                           Foreground="#c0392b"
+                                           FontWeight="Bold"
+                                           Margin="2" />
                                 </StackPanel>
 
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="Informateurs :" 
-                                               FontWeight="Bold" 
-                                               Margin="5"
-                                               Width="80" />
+                                    <TextBlock Text="Brands:" 
+                                               Margin="2" />
+                                    <TextBlock Text="{Binding Brands}"
+                                               Margin="2" />
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Creator:" 
+                                               Margin="2" />
+                                    <TextBlock Text="{Binding Creator}"
+                                               Margin="2" />
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Informers:" 
+                                               Margin="2" />
                                     <TextBlock Text="{Binding Informers_tags}"
-                                               Margin="5" />
+                                               Margin="2" />
                                 </StackPanel>
                             </StackPanel>
-
                         </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>

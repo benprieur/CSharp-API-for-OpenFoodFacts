@@ -2,6 +2,7 @@
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data;
 
 namespace OpenFoodFactsAPI
@@ -12,6 +13,11 @@ namespace OpenFoodFactsAPI
         public const string SLASH = "/";
         public const string PRODUCT_TAG = "product";
         public const string PRODUCTS_TAG = "products";
+        public const string TAGS = "tags";
+
+        public int page { get; set; }
+        public int page_size { get; set; }
+        public int count { get; set; }
 
         /// <summary>
         /// get_product
@@ -32,14 +38,60 @@ namespace OpenFoodFactsAPI
         {
             Product product = new Product();
 
+            // product_name
+            try
+            {
+                product.Product_name = (string)jtoken["product_name"];
+            }
+            catch
+            {
+                product.Product_name = "";
+            }
+            // id
+            try
+            {
+                product.Id = (string)jtoken["id"];
+            }
+            catch
+            {
+                product.Id = "";
+            }
             // creator
-            product.Creator = (string)jtoken["creator"];
-
+            try
+            {
+                product.Creator = (string)jtoken["creator"];
+            }
+            catch
+            {
+                product.Creator = "";
+            }
             // image_thumb_url
-            product.Image_thumb_url = (string)jtoken["image_thumb_url"];
-
+            try
+            { 
+                product.Image_thumb_url = (string)jtoken["image_thumb_url"];
+            }
+            catch
+            {
+                product.Image_thumb_url = "";
+            }
             // informers_tags
-            product.Informers_tags = string.Join(", ", jtoken["informers_tags"].Values());
+            try
+            {
+                product.Informers_tags = string.Join(", ", jtoken["informers_tags"].Values());
+            }
+            catch
+            {
+                product.Informers_tags = "";
+            }
+            // brands
+            try
+            { 
+                product.Brands = string.Join(", ", jtoken["brands_tags"].Values());
+            }
+            catch
+            {
+                product.Brands = "";
+            }
 
             return product;
         }
@@ -85,13 +137,43 @@ namespace OpenFoodFactsAPI
         /// </summary>
         /// <param name="query"></param>
         /// <returns></returns>
-        public List<Product> get_by_facets_deserialize(Dictionary<string, string> query)
+        public ObservableCollection<Product> get_by_facets_deserialize(Dictionary<string, string> query)
         {
             string json = get_by_facets(query);
-            var jObject = JObject.Parse(json);
-            JToken jtokens = jObject[PRODUCTS_TAG];
 
-            List<Product> products = new List<Product>();
+            var jObject = JObject.Parse(json);
+
+            // page
+            try
+            {
+                page = (int)jObject["page"];
+            }
+            catch
+            {
+                page = -1;
+            }
+            // page_size
+            try
+            {
+                page_size = (int)jObject["page_size"];
+            }
+            catch
+            {
+                page = -1;
+            }
+            // count
+            try
+            {
+                count = (int)jObject["count"];
+            }
+            catch
+            {
+                page = -1;
+            }
+
+            JToken jtokens = jObject[PRODUCTS_TAG];
+            
+            ObservableCollection<Product> products = new ObservableCollection<Product>();
             foreach(JToken jtoken in jtokens)
             {
                 Product product = Deserialize(jtoken);
@@ -100,89 +182,39 @@ namespace OpenFoodFactsAPI
 
             return products;
         }
-        
-        // Get all available additives.
-        public string get_additives()
+
+        // Get all available data.
+        /// <summary>
+        /// get_data
+        /// </summary>
+        /// <param name="facet"></param>
+        /// <returns></returns>
+        public string get_data(Facets facet)
         {
-            return Utils.fetch(Facets.additives.ToString());
+            return Utils.fetch(facet.ToString());
         }
 
-        // Get all available allergens.
-        public string get_allergens()
+        // Get all data countries.
+        /// <summary>
+        /// get_data_deserialize
+        /// </summary>
+        /// <param name="facet"></param>
+        /// <returns></returns>
+        public ObservableCollection<Tags> get_data_deserialize(Facets facet)
         {
-            return Utils.fetch(Facets.allergens.ToString());
-        }
+            string json = Utils.fetch(facet.ToString());
 
-        // Get all available brands.
-        public string get_brands()
-        {
-            return Utils.fetch(Facets.brands.ToString());
-        }
+            var jObject = JObject.Parse(json);
+            JToken jtokens = jObject[TAGS];
 
-        // Get all available categories.
-        public string get_categories()
-        {
-            return Utils.fetch(Facets.categories.ToString());
-        }
+            ObservableCollection<Tags> countries = new ObservableCollection<Tags>();
+            foreach (JToken jtoken in jtokens)
+            {
+                Tags country = JsonConvert.DeserializeObject<Tags>(jtoken.ToString());
+                countries.Add(country);
+            }
 
-        // Get all available countries.
-        public string get_countries()
-        {
-            return Utils.fetch(Facets.countries.ToString());
-        }
-
-        // Get all available entry_dates.
-        public string get_entry_dates()
-        {
-            return Utils.fetch(Facets.entry_dates.ToString());
-        }
-
-        // Get all available ingredients.
-        public string get_ingredients()
-        {
-            return Utils.fetch(Facets.ingredients.ToString());
-        }
-
-        // Get all available languages.
-        public string get_languages()
-        {
-            return Utils.fetch(Facets.languages.ToString());
-        }
-
-        // Get all available packagings.
-        public string get_packagings()
-        {
-            return Utils.fetch(Facets.packagings.ToString());
-        }
-
-        // Get all available packagings.
-        public string get_packager_codes()
-        {
-            return Utils.fetch(Facets.packager_code.ToString());
-        }
-
-        // Get all available purchase_places.
-        public string get_purchase_places()
-        {
-            return Utils.fetch(Facets.purchase_places.ToString());
-        }
-
-        // Get all available stores.
-        public string get_purchase_stores()
-        {
-            return Utils.fetch(Facets.stores.ToString());
-        }
-
-        // Get all available trace types.
-        public string get_traces()
-        {
-            return Utils.fetch(Facets.traces.ToString());
-        }
-
-        // Get all available states.
-        public string get_states()
-        {
-            return Utils.fetch(Facets.states.ToString());
+            return countries;
         }
     }
 }

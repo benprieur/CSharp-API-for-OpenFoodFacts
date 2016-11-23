@@ -14,7 +14,23 @@ namespace WpfOpenFoodFacts
     public partial class MainWindow : Window, INotifyPropertyChanged, IDisposable
     {
         RequestProduct m_off;
+
+        // Meta data
+        int m_page;
+        int m_page_size;
+        int m_count;
+
         ObservableCollection<Product> m_products;
+        // Product m_product;
+        
+        ObservableCollection<Tags> m_countries;
+        Tags m_country;
+
+        ObservableCollection<Tags> m_informers;
+        Tags m_informer;
+
+        ObservableCollection<Tags> m_brands;
+        Tags m_brand;
 
         // Implements INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
@@ -34,7 +50,9 @@ namespace WpfOpenFoodFacts
             InitializeComponent();
 
             m_off = new RequestProduct();
-            m_products = new ObservableCollection<Product>();
+            Countries = m_off.get_data_deserialize(Facets.countries);
+            Informers = m_off.get_data_deserialize(Facets.informers);
+            Brands = m_off.get_data_deserialize(Facets.brands);
 
             this.DataContext = this;
         }
@@ -49,6 +67,10 @@ namespace WpfOpenFoodFacts
             Product product = m_off.get_product_deserialize(Barcode.Text);
             Products.Clear();
             Products.Add(product);
+
+            Page = m_off.page;
+            Page_size = m_off.page_size;
+            Count = m_off.count;
         }
 
         /// <summary>
@@ -59,14 +81,30 @@ namespace WpfOpenFoodFacts
         public void get_by_facets_Click(object sender, RoutedEventArgs e)
         {
             Dictionary<string, string> query = new Dictionary<string, string>();
-            query.Add(Facets.informer.ToString(), "agamitsudo");
-            query.Add(Facet.country.ToString(), "italy");
-            List<Product> result = m_off.get_by_facets_deserialize(query);
-            Products.Clear();
-            foreach (Product p in result)
+
+            // Country
+            if (m_country != null)
             {
-                Products.Add(p);
+                query.Add(Facet.country.ToString(), m_country.name);
             }
+
+            // Informer
+            if (m_informer != null)
+            {
+                query.Add(Facet.informer.ToString(), m_informer.name);
+            }
+
+            // Brand
+            if (m_brand != null)
+            {
+                query.Add(Facet.brand.ToString(), m_brand.name);
+            }
+
+            // Request
+            Products = m_off.get_by_facets_deserialize(query);
+            Page = m_off.page;
+            Page_size = m_off.page_size;
+            Count = m_off.count;
         }
 
         public void Dispose()
@@ -90,6 +128,148 @@ namespace WpfOpenFoodFacts
             }
         }
 
+        /// <summary>
+        /// Countries (binding)
+        /// </summary>
+        public ObservableCollection<Tags> Countries
+        {
+            get
+            {
+                return m_countries;
+            }
+            set
+            {
+                m_countries = value;
+                OnPropertyChanged("Countries");
+            }
+        }
 
+        /// <summary>
+        /// Country (binding)
+        /// </summary>
+        public Tags Country
+        {
+            get
+            {
+                return m_country;
+            }
+            set
+            {
+                m_country = value;
+                OnPropertyChanged("Country");
+            }
+        }
+
+        /// <summary>
+        /// Informers (binding)
+        /// </summary>
+        public ObservableCollection<Tags> Informers
+        {
+            get
+            {
+                return m_informers;
+            }
+            set
+            {
+                m_informers = value;
+                OnPropertyChanged("Informers");
+            }
+        }
+
+        /// <summary>
+        /// Informer (binding)
+        /// </summary>
+        public Tags Informer
+        {
+            get
+            {
+                return m_informer;
+            }
+            set
+            {
+                m_informer = value;
+                OnPropertyChanged("Informer");
+            }
+        }
+
+        /// <summary>
+        /// Brands (binding)
+        /// </summary>
+        public ObservableCollection<Tags> Brands
+        {
+            get
+            {
+                return m_brands;
+            }
+            set
+            {
+                m_brands = value;
+                OnPropertyChanged("Brands");
+            }
+        }
+
+        /// <summary>
+        /// Brand (binding)
+        /// </summary>
+        public Tags Brand
+        {
+            get
+            {
+                return m_brand;
+            }
+            set
+            {
+                m_brand = value;
+                OnPropertyChanged("Brand");
+            }
+        }
+
+        /// <summary>
+        /// Count (binding)
+        /// </summary>
+        public int Count
+        {
+            get
+            {
+                return m_count;
+            }
+            set
+            {
+                m_count = value;
+                OnPropertyChanged("Count");
+            }
+        }
+
+        /// <summary>
+        /// Page_size (binding)
+        /// </summary>
+        public int Page_size
+        {
+            get
+            {
+                return m_page_size;
+            }
+            set
+            {
+                m_page_size = value;
+                OnPropertyChanged("Page_size");
+            }
+        }
+
+        /// <summary>
+        /// Page (binding)
+        /// </summary>
+        public int Page
+        {
+            get
+            {
+                return m_page;
+            }
+            set
+            {
+                m_page = value;
+                OnPropertyChanged("Page");
+            }
+        }
     }
 }
