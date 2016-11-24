@@ -7,8 +7,9 @@
         xmlns:loadin="clr-namespace:LoadingIndicators.WPF;assembly=LoadingIndicators.WPF"
         xmlns:toolkit="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Input.Toolkit"
         mc:Ignorable="d"
-        Background="#bdc3c7"
-        Title="Client c# OpenFoodFacts" Height="350" Width="525"
+        Background="#ecf0f1"
+        Title="Client c# OpenFoodFacts"
+        Icon="off.ico"
         IsEnabled="{Binding IsWindowActive}">
 
     <Window.Resources>

@@ -52,6 +52,7 @@ namespace WpfOpenFoodFacts
         /// </summary>
         public MainWindow()
         {
+            Application.Current.MainWindow.WindowState = WindowState.Maximized;
             InitializeComponent();
 
             m_isActive = true;
