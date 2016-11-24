@@ -168,7 +168,7 @@
                                 <Image 
                                 Width="50"
                                 Margin="2"
-                                Source="{Binding Image_thumb_url}"/>
+                                Source="{Binding image_thumb_url}"/>
 
                                 <Border BorderBrush="#2c3e50"
                                 Margin="1"    
@@ -179,13 +179,13 @@
 
                                         <StackPanel Orientation="Horizontal">
 
-                                            <TextBlock Text="{Binding Product_name}"
+                                            <TextBlock Text="{Binding product_name}"
                                                TextWrapping="Wrap"
                                                Width="125"        
                                                Foreground="#2c3e50"
                                                FontWeight="Bold"
                                                Margin="2" />
-                                            <TextBlock Text="{Binding Id}"
+                                            <TextBlock Text="{Binding id}"
                                                TextWrapping="Wrap"
                                                Width="125"    
                                                Foreground="#c0392b"
@@ -196,14 +196,14 @@
                                         <StackPanel Orientation="Horizontal">
                                             <TextBlock Text="Brands:" 
                                                Margin="2" />
-                                            <TextBlock Text="{Binding Brands}"
+                                            <TextBlock Text="{Binding brands_tags}"
                                                Margin="2" />
                                         </StackPanel>
 
                                         <StackPanel Orientation="Horizontal">
                                             <TextBlock Text="Creator:" 
                                                Margin="2" />
-                                            <TextBlock Text="{Binding Creator}"
+                                            <TextBlock Text="{Binding creator}"
                                                Margin="2" />
                                         </StackPanel>
 
@@ -211,7 +211,7 @@
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="Informers:" 
                                                Margin="2" />
-                                    <TextBlock Text="{Binding Informers_tags}"
+                                    <TextBlock Text="{Binding informers_tags}"
                                                Margin="2" />
                                 </StackPanel>
                                 -->
@@ -223,11 +223,11 @@
                                 BorderThickness="1,1,1,1"
                                 CornerRadius="8,8,8,8">
 
-                                    <TextBox Margin="2"
+                                    <TextBlock Margin="2"
                                            Width="250"    
                                            TextWrapping="Wrap"
                                            FontStyle="Italic"
-                                           Text="{Binding Ingredients_text}" />
+                                           Text="{Binding ingredients_text}" />
                                 </Border>
                             </StackPanel>
                         </DataTemplate>

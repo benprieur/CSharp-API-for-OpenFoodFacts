@@ -7,7 +7,7 @@ using System.Data;
 
 namespace OpenFoodFactsAPI
 {
-    public class RequestProduct
+    public partial class RequestProduct
     {
         public const string PREFIX_URL = "api/v0/product/";
         public const string SLASH = "/";
@@ -27,81 +27,6 @@ namespace OpenFoodFactsAPI
         public string get_product(string barcode)
         {
             return Utils.fetch(PREFIX_URL + barcode, 1);
-        }
-
-        /// <summary>
-        /// Deserialize
-        /// </summary>
-        /// <param name="jtoken"></param>
-        /// <returns></returns>
-        public Product Deserialize(JToken jtoken)
-        {
-            Product product = new Product();
-
-            // product_name
-            try
-            {
-                product.Product_name = (string)jtoken["product_name"];
-            }
-            catch
-            {
-                product.Product_name = "";
-            }
-            // id
-            try
-            {
-                product.Id = (string)jtoken["id"];
-            }
-            catch
-            {
-                product.Id = "";
-            }
-            // creator
-            try
-            {
-                product.Creator = (string)jtoken["creator"];
-            }
-            catch
-            {
-                product.Creator = "";
-            }
-            // image_thumb_url
-            try
-            { 
-                product.Image_thumb_url = (string)jtoken["image_thumb_url"];
-            }
-            catch
-            {
-                product.Image_thumb_url = "";
-            }
-            // informers_tags
-            try
-            {
-                product.Informers_tags = string.Join(", ", jtoken["informers_tags"].Values());
-            }
-            catch
-            {
-                product.Informers_tags = "";
-            }
-            // brands
-            try
-            { 
-                product.Brands = string.Join(", ", jtoken["brands_tags"].Values());
-            }
-            catch
-            {
-                product.Brands = "";
-            }
-            // ingredients_text
-            try
-            {
-                product.Ingredients_text = (string)jtoken["ingredients_text"];
-            }
-            catch
-            {
-                product.Ingredients_text = "";
-            }
-            return product;
         }
 
         /// <summary>

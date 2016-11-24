@@ -8,6 +8,27 @@ using System.Threading.Tasks;
 
 namespace OpenFoodFactsAPI
 {
+    public class Product : DynamicObject, INotifyPropertyChanged
+    {
+        public string product_name { get; set; }
+        public string id { get; set; }
+        public string creator { get; set; }
+        public string image_thumb_url { get; set; }
+        public string informers_tags { get; set; }
+        public string brands_tags { get; set; }
+        public string ingredients_text { get; set; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            if (this.PropertyChanged != null)
+            {
+                this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+
+    /*
     public class NutrientLevels
     {
         public string sugars { get; set; }
@@ -71,123 +92,6 @@ namespace OpenFoodFactsAPI
         public double sugars { get; set; }
         public double salt_100g { get; set; }
     }
-    
-    public class Product : DynamicObject, INotifyPropertyChanged
-    {
-        // Image_thumb_url
-        protected string image_thumb_url;
-        public string Image_thumb_url
-        {
-            get
-            {
-                return image_thumb_url;
-            }
-            set
-            {
-                image_thumb_url = value;
-                OnPropertyChanged("Image_thumb_url");
-            }
-        }
-
-        // Creator
-        protected string m_creator;
-        public string Creator
-        {
-            get
-            {
-                return m_creator;
-            }
-            set
-            {
-                m_creator = value;
-                OnPropertyChanged("Creator");
-            }
-        }
-
-        // Informers_tags
-        protected string informers_tags;
-        public string Informers_tags
-        {
-            get
-            {
-                return informers_tags;
-            }
-            set
-            {
-                informers_tags = value;
-                OnPropertyChanged("Informers_tags");
-            }
-        }
-
-        // Product_name
-        protected string product_name;
-        public string Product_name
-        {
-            get
-            {
-                return product_name;
-            }
-            set
-            {
-                product_name = value;
-                OnPropertyChanged("Product_name");
-            }
-        }
-
-        // Brands
-        protected string brands;
-        public string Brands
-        {
-            get
-            {
-                return brands;
-            }
-            set
-            {
-                brands = value;
-                OnPropertyChanged("Brands");
-            }
-        }
-
-        // Id
-        protected string id;
-        public string Id
-        {
-            get
-            {
-                return id;
-            }
-            set
-            {
-                id = value;
-                OnPropertyChanged("Id");
-            }
-        }
-
-        protected string ingredients_text;
-        public string Ingredients_text
-        {
-            get
-            {
-                return ingredients_text;
-            }
-            set
-            {
-                ingredients_text = value;
-                OnPropertyChanged("Ingredients_text");
-            }
-        }
-        
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged(string propertyName)
-        {
-            if (this.PropertyChanged != null)
-            {
-                this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
 
     public class RootObject
     {
@@ -196,4 +100,5 @@ namespace OpenFoodFactsAPI
         public int status { get; set; }
         public Product product { get; set; }
     }
+    */
 }
