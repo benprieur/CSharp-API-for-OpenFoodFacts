@@ -35,7 +35,7 @@ namespace OpenFoodFactsAPI
                     stringJson = objReader.ReadToEnd();
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 throw new Exception(e.Message.ToString());
             }

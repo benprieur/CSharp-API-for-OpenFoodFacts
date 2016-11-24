@@ -4,10 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfOpenFoodFacts"
+        xmlns:loadin="clr-namespace:LoadingIndicators.WPF;assembly=LoadingIndicators.WPF"
         xmlns:toolkit="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Input.Toolkit"
         mc:Ignorable="d"
         Background="#bdc3c7"
-        Title="Client lourd de test" Height="350" Width="525">
+        Title="Client lourd de test" Height="350" Width="525"
+        IsEnabled="{Binding IsWindowActive}">
 
     <Window.Resources>
         <Style TargetType="{x:Type Button}">
@@ -46,71 +48,74 @@
                             Click="get_product_Click" />
                     </StackPanel>
 
-                    <WrapPanel Orientation="Horizontal" 
+                    <StackPanel Orientation="Vertical" 
                                Margin="2" >
 
-                        <TextBlock Text="Brand?"
+                        <TextBlock Text="Criteria"
+                                   FontWeight="Bold"
+                                   FontSize="14"
                                    Foreground="White"
                                    Margin="2"/>
 
-                        <toolkit:AutoCompleteBox x:Name="autoCompleteBoxBrand"        
-                                                 Width="150"
-                                                 Margin="2"
-                                                 FilterMode="Contains"              
-                                                 IsTextCompletionEnabled="True"
-                                                 ValueMemberPath="name"       
-                                                 ItemsSource="{Binding Brands}"
-                                                 SelectedItem="{Binding Brand, Mode=TwoWay}">
-                            <toolkit:AutoCompleteBox.ItemTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding name}"></TextBlock>
-                                </DataTemplate>
-                            </toolkit:AutoCompleteBox.ItemTemplate>
-                        </toolkit:AutoCompleteBox>
-
-                        <TextBlock Text="Country?"
+                        <TextBlock Text="Select products according brands, categories, labels, etc."
                                    Foreground="White"
                                    Margin="2"/>
 
-                        <toolkit:AutoCompleteBox x:Name="autoCompleteBoxCountry"        
-                                                 Width="150"
-                                                 Margin="2"
-                                                 FilterMode="Contains"              
-                                                 IsTextCompletionEnabled="True"
-                                                 ValueMemberPath="name"       
-                                                 ItemsSource="{Binding Countries}"
-                                                 SelectedItem="{Binding Country, Mode=TwoWay}">
-                            <toolkit:AutoCompleteBox.ItemTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding name}"></TextBlock>
-                                </DataTemplate>
-                            </toolkit:AutoCompleteBox.ItemTemplate>
-                        </toolkit:AutoCompleteBox>
+                        <StackPanel Orientation="Horizontal"
+                                    Margin="2">
 
-                        <TextBlock Text="Informer?"
-                                   Foreground="White"
-                                   Margin="2"/>
+                            <ComboBox Name="Combo1"
+                                      Width="100"
+                                      Margin="2"
+                                      SelectionChanged="EventMgt_Combo1Selection"
+                                      ItemsSource="{Binding Path=ComboFacets}" />
 
-                        <toolkit:AutoCompleteBox x:Name="autoCompleteBoxInformer"        
-                                                 Width="150"
-                                                 Margin="2"
-                                                 FilterMode="Contains"              
-                                                 IsTextCompletionEnabled="True"
-                                                 ValueMemberPath="name"       
-                                                 ItemsSource="{Binding Informers}"
-                                                 SelectedItem="{Binding Informer, Mode=TwoWay}">
-                            <toolkit:AutoCompleteBox.ItemTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding name}"></TextBlock>
-                                </DataTemplate>
-                            </toolkit:AutoCompleteBox.ItemTemplate>
-                        </toolkit:AutoCompleteBox>
+                            <toolkit:AutoCompleteBox x:Name="autoCompleteBox1"        
+                                    Width="150"
+                                    Margin="2"
+                                    FilterMode="Contains"              
+                                    IsTextCompletionEnabled="True"
+                                    ValueMemberPath="name"       
+                                    ItemsSource="{Binding Tags1}"
+                                    SelectedItem="{Binding Tag1, Mode=TwoWay}">
+                                <toolkit:AutoCompleteBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding name}"></TextBlock>
+                                    </DataTemplate>
+                                </toolkit:AutoCompleteBox.ItemTemplate>
+                            </toolkit:AutoCompleteBox>
 
-                        <Button Content="By criteria"
+                            <TextBlock Text="           " Margin="2" />
+                            
+                            <ComboBox Name="Combo2"
+                                      Width="100"
+                                      Margin="2"
+                                      SelectionChanged="EventMgt_Combo2Selection"
+                                      ItemsSource="{Binding Path=ComboFacets}" />
+
+                            <toolkit:AutoCompleteBox x:Name="autoCompleteBox2"        
+                                    Width="150"
+                                    Margin="2"
+                                    FilterMode="Contains"              
+                                    IsTextCompletionEnabled="True"
+                                    ValueMemberPath="name"       
+                                    ItemsSource="{Binding Tags2}"
+                                    SelectedItem="{Binding Tag2, Mode=TwoWay}">
+                                <toolkit:AutoCompleteBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding name}"></TextBlock>
+                                    </DataTemplate>
+                                </toolkit:AutoCompleteBox.ItemTemplate>
+                            </toolkit:AutoCompleteBox>
+
+                        </StackPanel>
+
+                        <Button Content="Advanced search"
+                            HorizontalAlignment="Right"
                             Width="100"    
                             Margin="2"
                             Click="get_by_facets_Click" />
-                    </WrapPanel>
+                    </StackPanel>
 
                     <Border BorderBrush="#2c3e50"
                         Background="WhiteSmoke" 
@@ -120,15 +125,14 @@
 
                         <StackPanel Orientation="Horizontal" Margin="2">
                             <TextBlock Text="Current page:"
+                                   FontWeight="Bold"    
                                    Foreground="#2c3e50"
                                    Margin="2"/>
                             <TextBlock Text="{Binding Page}" Margin="2" />
-                            <TextBlock Text="Page size:"
-                                   Foreground="#2c3e50"
-                                   Margin="2"/>
-                            <TextBlock Text="{Binding Page_Size}" Margin="2" />
+                            <TextBlock Text="           " Margin="2" />
                             <TextBlock Text="Count:"
                                    Foreground="#2c3e50"
+                                   FontWeight="Bold"
                                    Margin="2"/>
                             <TextBlock Text="{Binding Count}" Margin="2" />
                         </StackPanel>

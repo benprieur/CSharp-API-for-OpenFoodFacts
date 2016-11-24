@@ -200,9 +200,9 @@ namespace OpenFoodFactsAPI
         /// </summary>
         /// <param name="facet"></param>
         /// <returns></returns>
-        public ObservableCollection<Tags> get_data_deserialize(Facets facet)
+        public ObservableCollection<Tags> get_data_deserialize(string facet)
         {
-            string json = Utils.fetch(facet.ToString());
+            string json = Utils.fetch(facet);
 
             var jObject = JObject.Parse(json);
             JToken jtokens = jObject[TAGS];
@@ -215,6 +215,59 @@ namespace OpenFoodFactsAPI
             }
 
             return countries;
+        }
+
+        /// <summary>
+        /// FacetConvert
+        /// </summary>
+        /// <param name="facets"></param>
+        /// <returns></returns>
+        public Facet FacetConvert(Facets facets)
+        {
+            switch (facets)
+            {
+                case Facets.additives:
+                    return Facet.additive;
+                case Facets.allergens:
+                    return Facet.allergen;
+                case Facets.brands:
+                    return Facet.brand;
+                case Facets.categories:
+                    return Facet.category;
+                case Facets.countries:
+                    return Facet.country;
+                case Facets.contributors:
+                    return Facet.contributor;
+                case Facets.codes:
+                    return Facet.code;
+                case Facets.entry_dates:
+                    return Facet.entry_date;
+                case Facets.ingredients:
+                    return Facet.ingredient;
+                case Facets.labels:
+                    return Facet.label;
+                case Facets.languages:
+                    return Facet.language;
+                case Facets.nutrition_grade:
+                    return Facet.nutrition_grade;
+                case Facets.packagings:
+                    return Facet.packaging;
+                case Facets.packager_codes:
+                    return Facet.packager_code;
+                case Facets.photographers:
+                    return Facet.photographer;
+                case Facets.informers:
+                    return Facet.informer;
+                case Facets.purchase_places:
+                    return Facet.purchase_place;
+                case Facets.states:
+                    return Facet.state;
+                case Facets.stores:
+                    return Facet.store;
+                case Facets.traces:
+                    return Facet.trace;
+            }
+            throw new Exception("This value is not relevant: " + facets.ToString());
         }
     }
 }
