@@ -26,7 +26,7 @@ namespace OpenFoodFactsAPI
         /// <returns></returns>
         public string get_product(string barcode)
         {
-            return Utils.fetch(PREFIX_URL + barcode);
+            return Utils.fetch(PREFIX_URL + barcode, 1);
         }
 
         /// <summary>
@@ -92,7 +92,15 @@ namespace OpenFoodFactsAPI
             {
                 product.Brands = "";
             }
-
+            // ingredients_text
+            try
+            {
+                product.Ingredients_text = (string)jtoken["ingredients_text"];
+            }
+            catch
+            {
+                product.Ingredients_text = "";
+            }
             return product;
         }
 
@@ -129,7 +137,7 @@ namespace OpenFoodFactsAPI
                 }
                 path += key + SLASH + query[key];
             }
-            return Utils.fetch(path);
+            return Utils.fetch(path, page);
         }
 
         /// <summary>
@@ -191,7 +199,7 @@ namespace OpenFoodFactsAPI
         /// <returns></returns>
         public string get_data(Facets facet)
         {
-            return Utils.fetch(facet.ToString());
+            return Utils.fetch(facet.ToString(), 1);
         }
 
         // Get all data countries.
@@ -202,19 +210,19 @@ namespace OpenFoodFactsAPI
         /// <returns></returns>
         public ObservableCollection<Tags> get_data_deserialize(string facet)
         {
-            string json = Utils.fetch(facet);
+            string json = Utils.fetch(facet, 1);
 
             var jObject = JObject.Parse(json);
             JToken jtokens = jObject[TAGS];
 
-            ObservableCollection<Tags> countries = new ObservableCollection<Tags>();
+            ObservableCollection<Tags> tags = new ObservableCollection<Tags>();
             foreach (JToken jtoken in jtokens)
             {
-                Tags country = JsonConvert.DeserializeObject<Tags>(jtoken.ToString());
-                countries.Add(country);
+                Tags tag = JsonConvert.DeserializeObject<Tags>(jtoken.ToString());
+                tags.Add(tag);
             }
 
-            return countries;
+            return tags;
         }
 
         /// <summary>

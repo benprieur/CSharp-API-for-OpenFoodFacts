@@ -104,6 +104,8 @@ namespace WpfOpenFoodFacts
                 query.Add(f.ToString(), m_tag2.name);
             }
 
+            // Page
+            m_off.page = Page;
 
             // Request
             Products = m_off.get_by_facets_deserialize(query);

@@ -164,6 +164,21 @@ namespace OpenFoodFactsAPI
             }
         }
 
+        protected string ingredients_text;
+        public string Ingredients_text
+        {
+            get
+            {
+                return ingredients_text;
+            }
+            set
+            {
+                ingredients_text = value;
+                OnPropertyChanged("Ingredients_text");
+            }
+        }
+        
+
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)
         {

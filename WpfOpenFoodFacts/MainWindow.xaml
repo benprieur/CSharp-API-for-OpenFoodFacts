@@ -8,7 +8,7 @@
         xmlns:toolkit="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Input.Toolkit"
         mc:Ignorable="d"
         Background="#bdc3c7"
-        Title="Client lourd de test" Height="350" Width="525"
+        Title="Client c# OpenFoodFacts" Height="350" Width="525"
         IsEnabled="{Binding IsWindowActive}">
 
     <Window.Resources>
@@ -19,58 +19,65 @@
         </Style>
     </Window.Resources>
 
-    <Grid VerticalAlignment="Top">
+    <ScrollViewer x:Name="Scrolling"
+                VerticalScrollBarVisibility="Auto"
+                HorizontalScrollBarVisibility="Auto" 
+                HorizontalAlignment="Stretch"
+                Margin="10">
 
-        <StackPanel VerticalAlignment="Top" 
+        <Grid VerticalAlignment="Top">
+
+            <StackPanel VerticalAlignment="Top" 
                     HorizontalAlignment="Center" 
-                    Width="800"
+                    Width="1000"
+                    Height="800"    
                     Orientation="Vertical"
                     Margin="2">
 
-            <Border BorderBrush="#FF000000"
+                <Border BorderBrush="#FF000000"
                     Background="#2c3e50" 
                     BorderThickness="1,1,1,1"
                     CornerRadius="8,8,8,8"
                     Margin="2,2,2,2">
 
-                <StackPanel>
-                    <StackPanel Orientation="Horizontal" 
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal" 
                             Margin="2">
 
-                        <TextBox 
+                            <TextBox 
                              Margin="2"    
                              Width="100" 
                              Text="3596710304578"
                              Name="Barcode" />
-                        <Button Content="By barcode" 
+                            <Button Content="By barcode" 
                             Margin="2"
                             Width="120"
                             Click="get_product_Click" />
-                    </StackPanel>
+                        </StackPanel>
 
-                    <StackPanel Orientation="Vertical" 
+                        <StackPanel Orientation="Vertical" 
                                Margin="2" >
 
-                        <TextBlock Text="Criteria"
+                            <TextBlock Text="Criteria"
                                    FontWeight="Bold"
                                    FontSize="14"
                                    Foreground="White"
                                    Margin="2"/>
 
-                        <TextBlock Text="Select products according brands, categories, labels, etc."
+                            <TextBlock Text="Select products according brands, categories, labels, etc."
                                    Foreground="White"
                                    Margin="2"/>
 
-                        <StackPanel Orientation="Horizontal"
+                            <StackPanel Orientation="Horizontal"
                                     Margin="2">
 
-                            <ComboBox Name="Combo1"
+                                <ComboBox Name="Combo1"
                                       Width="100"
                                       Margin="2"
                                       SelectionChanged="EventMgt_Combo1Selection"
                                       ItemsSource="{Binding Path=ComboFacets}" />
 
-                            <toolkit:AutoCompleteBox x:Name="autoCompleteBox1"        
+                                <toolkit:AutoCompleteBox x:Name="autoCompleteBox1"        
                                     Width="150"
                                     Margin="2"
                                     FilterMode="Contains"              
@@ -78,22 +85,22 @@
                                     ValueMemberPath="name"       
                                     ItemsSource="{Binding Tags1}"
                                     SelectedItem="{Binding Tag1, Mode=TwoWay}">
-                                <toolkit:AutoCompleteBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding name}"></TextBlock>
-                                    </DataTemplate>
-                                </toolkit:AutoCompleteBox.ItemTemplate>
-                            </toolkit:AutoCompleteBox>
+                                    <toolkit:AutoCompleteBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding name}"></TextBlock>
+                                        </DataTemplate>
+                                    </toolkit:AutoCompleteBox.ItemTemplate>
+                                </toolkit:AutoCompleteBox>
 
-                            <TextBlock Text="           " Margin="2" />
-                            
-                            <ComboBox Name="Combo2"
+                                <TextBlock Text="           " Margin="2" />
+
+                                <ComboBox Name="Combo2"
                                       Width="100"
                                       Margin="2"
                                       SelectionChanged="EventMgt_Combo2Selection"
                                       ItemsSource="{Binding Path=ComboFacets}" />
 
-                            <toolkit:AutoCompleteBox x:Name="autoCompleteBox2"        
+                                <toolkit:AutoCompleteBox x:Name="autoCompleteBox2"        
                                     Width="150"
                                     Margin="2"
                                     FilterMode="Contains"              
@@ -101,47 +108,51 @@
                                     ValueMemberPath="name"       
                                     ItemsSource="{Binding Tags2}"
                                     SelectedItem="{Binding Tag2, Mode=TwoWay}">
-                                <toolkit:AutoCompleteBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding name}"></TextBlock>
-                                    </DataTemplate>
-                                </toolkit:AutoCompleteBox.ItemTemplate>
-                            </toolkit:AutoCompleteBox>
+                                    <toolkit:AutoCompleteBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding name}"></TextBlock>
+                                        </DataTemplate>
+                                    </toolkit:AutoCompleteBox.ItemTemplate>
+                                </toolkit:AutoCompleteBox>
 
+                            </StackPanel>
+
+                            <StackPanel HorizontalAlignment="Right"
+                                    Orientation="Horizontal">
+                                <TextBlock Text="Current page:"
+                                       Foreground="White"
+                                       Margin="2"/>
+                                <TextBox Width="50"
+                                     HorizontalAlignment="Center"
+                                     Text="{Binding Page, Mode=TwoWay}" 
+                                     Margin="2" />
+                                <Button Content="Advanced search"
+                                Width="100"    
+                                Margin="2"
+                                Click="get_by_facets_Click" />
+
+                            </StackPanel>
                         </StackPanel>
 
-                        <Button Content="Advanced search"
-                            HorizontalAlignment="Right"
-                            Width="100"    
-                            Margin="2"
-                            Click="get_by_facets_Click" />
-                    </StackPanel>
-
-                    <Border BorderBrush="#2c3e50"
+                        <Border BorderBrush="#2c3e50"
                         Background="WhiteSmoke" 
                         BorderThickness="3,3,3,3"
                         CornerRadius="8,8,8,8"
                         Margin="2,2,2,2">
 
-                        <StackPanel Orientation="Horizontal" Margin="2">
-                            <TextBlock Text="Current page:"
-                                   FontWeight="Bold"    
-                                   Foreground="#2c3e50"
-                                   Margin="2"/>
-                            <TextBlock Text="{Binding Page}" Margin="2" />
-                            <TextBlock Text="           " Margin="2" />
-                            <TextBlock Text="Count:"
+                            <StackPanel Orientation="Horizontal" Margin="2">
+                                <TextBlock Text="Number of results:"
                                    Foreground="#2c3e50"
                                    FontWeight="Bold"
                                    Margin="2"/>
-                            <TextBlock Text="{Binding Count}" Margin="2" />
-                        </StackPanel>
+                                <TextBlock Text="{Binding Count}" Margin="2" />
+                            </StackPanel>
 
-                    </Border>
-                </StackPanel>
-            </Border>
+                        </Border>
+                    </StackPanel>
+                </Border>
 
-            <ListBox ItemsSource="{Binding Products}"
+                <ListBox ItemsSource="{Binding Products}"
                      BorderBrush="#c0392b"
                      BorderThickness="3,3,3,3"
                      Height="600"
@@ -149,55 +160,80 @@
                      ScrollViewer.VerticalScrollBarVisibility="Visible"  
                      Margin="2">
 
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
 
-                            <Image 
+                                <Image 
                                 Width="50"
                                 Margin="2"
                                 Source="{Binding Image_thumb_url}"/>
 
-                            <StackPanel Orientation="Vertical">
+                                <Border BorderBrush="#2c3e50"
+                                Margin="1"    
+                                BorderThickness="1,1,1,1"
+                                CornerRadius="8,8,8,8">
 
-                                <StackPanel Orientation="Horizontal">
+                                    <StackPanel Orientation="Vertical" Width="250">
 
-                                    <TextBlock Text="{Binding Product_name}"
-                                           Foreground="#2c3e50"
-                                           FontWeight="Bold"
-                                           Margin="2" />
-                                    <TextBlock Text="{Binding Id}"
-                                           Foreground="#c0392b"
-                                           FontWeight="Bold"
-                                           Margin="2" />
-                                </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
 
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="Brands:" 
+                                            <TextBlock Text="{Binding Product_name}"
+                                               TextWrapping="Wrap"
+                                               Width="125"        
+                                               Foreground="#2c3e50"
+                                               FontWeight="Bold"
                                                Margin="2" />
-                                    <TextBlock Text="{Binding Brands}"
+                                            <TextBlock Text="{Binding Id}"
+                                               TextWrapping="Wrap"
+                                               Width="125"    
+                                               Foreground="#c0392b"
+                                               FontWeight="Bold"
                                                Margin="2" />
-                                </StackPanel>
+                                        </StackPanel>
 
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="Creator:" 
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Brands:" 
                                                Margin="2" />
-                                    <TextBlock Text="{Binding Creator}"
+                                            <TextBlock Text="{Binding Brands}"
                                                Margin="2" />
-                                </StackPanel>
+                                        </StackPanel>
 
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Creator:" 
+                                               Margin="2" />
+                                            <TextBlock Text="{Binding Creator}"
+                                               Margin="2" />
+                                        </StackPanel>
+
+                                        <!--
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="Informers:" 
                                                Margin="2" />
                                     <TextBlock Text="{Binding Informers_tags}"
                                                Margin="2" />
                                 </StackPanel>
-                            </StackPanel>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
+                                -->
 
-        </StackPanel>
-    </Grid>
+                                    </StackPanel>
+                                </Border>
+                                <Border BorderBrush="#2c3e50"
+                                Margin="1"    
+                                BorderThickness="1,1,1,1"
+                                CornerRadius="8,8,8,8">
+
+                                    <TextBox Margin="2"
+                                           Width="250"    
+                                           TextWrapping="Wrap"
+                                           FontStyle="Italic"
+                                           Text="{Binding Ingredients_text}" />
+                                </Border>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
 </Window>

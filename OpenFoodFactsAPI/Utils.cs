@@ -7,22 +7,30 @@ namespace OpenFoodFactsAPI
 {
     public class Utils
     {
-        public const string API_URL = "http://world.openfoodfacts.org/";
+        public const string API_URL = "https://ssl-api.openfoodfacts.org/";
+        // public const string API_URL = "http://world.openfoodfacts.org/";
         public const string JSON_EXTENSION = ".json";
         public const string APP_JSON = "application/json";
-
+        public const string SLASH = "/";
         /// <summary>
         /// fetch
         /// </summary>
         /// <param name="path"></param>
         /// <returns></returns>
-        public static string fetch(string path)
+        public static string fetch(string path, int page)
         {
             //Fetch data at a given path assuming that target match a json file and is
             //located on the OFF API.
 
             WebRequest wrGETURL;
-            wrGETURL = WebRequest.Create(API_URL + path + JSON_EXTENSION);
+            string url = API_URL + path;
+            if (page > 1)
+            {
+                url += SLASH + page;
+            }
+            url += JSON_EXTENSION;
+
+            wrGETURL = WebRequest.Create(url);
             wrGETURL.ContentType = APP_JSON;
             wrGETURL.Proxy = null;
 
