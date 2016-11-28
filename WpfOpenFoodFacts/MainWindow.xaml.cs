@@ -59,6 +59,7 @@ namespace WpfOpenFoodFacts
 
             m_off = new RequestProduct();
             ComboFacets = Enum.GetNames(typeof(Facets)).ToList();
+            Products = new ObservableCollection<Product>();
             this.DataContext = this;
         }
 
@@ -69,13 +70,20 @@ namespace WpfOpenFoodFacts
         /// <param name="e"></param>
         public void get_product_Click(object sender, RoutedEventArgs e)
         {
-            Product product = m_off.get_product_deserialize(Barcode.Text);
-            Products.Clear();
-            Products.Add(product);
+            try
+            { 
+                Product product = m_off.get_product_deserialize(Barcode.Text);
+                Products.Clear();
+                Products.Add(product);
 
-            Page = m_off.page;
-            Page_size = m_off.page_size;
-            Count = m_off.count;
+                Page = m_off.page;
+                Page_size = m_off.page_size;
+                Count = m_off.count;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message.ToString());
+            }
         }
 
         /// <summary>

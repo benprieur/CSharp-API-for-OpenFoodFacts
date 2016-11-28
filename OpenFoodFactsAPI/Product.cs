@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace OpenFoodFactsAPI
 {
-    public class Product : DynamicObject, INotifyPropertyChanged
+    public class Product
     {
         public string product_name { get; set; }
         public string id { get; set; }
@@ -17,15 +17,6 @@ namespace OpenFoodFactsAPI
         public string informers_tags { get; set; }
         public string brands_tags { get; set; }
         public string ingredients_text { get; set; }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged(string propertyName)
-        {
-            if (this.PropertyChanged != null)
-            {
-                this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
     }
 
     /*
