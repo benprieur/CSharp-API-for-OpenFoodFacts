@@ -1,20 +1,11 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
+using System.Collections.Generic;
 using System.Reflection;
 
 namespace OpenFoodFactsAPI
 {
-    public enum DesValue
-    {
-        product_name,
-        id,
-        creator,
-        image_thumb_url,
-        informers_tags,
-        brands_tags,
-        ingredients_text
-    };
-
     public partial class RequestProduct
     {
         /// <summary>
@@ -26,40 +17,83 @@ namespace OpenFoodFactsAPI
         {
             Product product = new Product();
 
-            var enumValues = Enum.GetValues(typeof(DesValue));
-            foreach (var des in enumValues)
+            var properties = typeof(Product).GetProperties();
+            foreach (var prop in properties)
             {
                 try
                 {
-                    string desValue = des.ToString();
-                    string result = "";
+                    string propName = prop.Name;
+                    PropertyInfo property = typeof(Product).GetProperty(propName);
 
-                    // Here we get the property to set.
-                    /* string propertyName = desValue[0].ToString().ToUpper() +
-                                          desValue.Substring(1); */
+                    //////////////////////////////////////////////
+                    //
+                    // "_tags" => List<string>
+                    //
+                    //////////////////////////////////////////////
 
-                    PropertyInfo property = typeof(Product).GetProperty(desValue);
-
-                    // Here we get the value to set.
-                    // Join
-                    if (desValue.IndexOf("_tags") > -1)
+                    if (prop.PropertyType == typeof(List<string>))
                     {
-                        result = string.Join(", ", jtoken[desValue].Values());
+                        try
+                        {
+                            List<string> result = new List<string>();
+                            foreach (string elt in jtoken[propName].Values())
+                            {
+                                result.Add(elt);
+                            }
+                            property.SetValue(product, result);
+                        }
+                        catch (Exception ex)
+                        {
+                            string message = ex.Message.ToString();
+                            property.SetValue(product, new List<string>());
+                        }
                     }
-                    // Simple
-                    else
+
+                    //////////////////////////////////////////////
+                    //
+                    // "_n" => integer
+                    //
+                    //////////////////////////////////////////////
+
+                    else if (prop.PropertyType == typeof(int))
                     {
-                        result = (string)jtoken[desValue];
+                        try
+                        {
+                            int result = int.Parse(jtoken[propName].ToString());
+                            property.SetValue(product, result);
+                        }
+                        catch (Exception ex)
+                        {
+                            string message = ex.Message.ToString();
+                            property.SetValue(product, 0);
+                        }
                     }
 
-                    // Here we set the value.
-                    try
+                    //////////////////////////////////////////////
+                    //
+                    // Nutriments
+                    //
+                    //////////////////////////////////////////////
+
+
+                    //////////////////////////////////////////////
+                    //
+                    // General case
+                    //
+                    //////////////////////////////////////////////
+
+                    if (prop.PropertyType == typeof(string))
                     {
-                        property.SetValue(product, result);
-                    }
-                    catch
-                    {
-                        property.SetValue(product, "");
+                        try
+                        {
+                            string result = (string)jtoken[propName];
+                            property.SetValue(product, result);
+                        }
+                        catch (Exception ex)
+                        {
+                            string message = ex.Message.ToString();
+                            property.SetValue(product, "");
+                        }
                     }
                 }
                 catch (Exception e)
