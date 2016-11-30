@@ -207,17 +207,9 @@
                                                Margin="2" />
                                         </StackPanel>
 
-                                        <!--
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="Informers:" 
-                                               Margin="2" />
-                                    <TextBlock Text="{Binding informers_tags}"
-                                               Margin="2" />
-                                </StackPanel>
-                                -->
-
                                     </StackPanel>
                                 </Border>
+
                                 <Border BorderBrush="#2c3e50"
                                 Margin="1"    
                                 BorderThickness="1,1,1,1"
@@ -229,12 +221,58 @@
                                            FontStyle="Italic"
                                            Text="{Binding ingredients_text}" />
                                 </Border>
+
+                                <Border BorderBrush="#2c3e50"
+                                    Margin="1"    
+                                    Width="300"
+                                    BorderThickness="1,1,1,1"
+                                    CornerRadius="8,8,8,8">
+
+                                    <StackPanel Orientation="Vertical">
+
+                                        <StackPanel Orientation="Horizontal"
+                                                    HorizontalAlignment="Center">
+                                            <TextBlock Text="Nutrient Levels"
+                                                       FontWeight="Bold"
+                                                       Foreground="#2c3e50"
+                                                       Margin="2" />
+                                        </StackPanel>
+                                        
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Sugars:" FontWeight="Bold"
+                                                Margin="2" />
+                                            <TextBlock Text="{Binding nutrient_levels.sugars}"
+                                                Margin="2"/>
+                                        </StackPanel>
+
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="salt:" FontWeight="Bold"
+                                                Margin="2" />
+                                            <TextBlock Text="{Binding nutrient_levels.salt}"
+                                                Margin="2"/>
+                                        </StackPanel>
+
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="fat:" FontWeight="Bold"
+                                                Margin="2" />
+                                            <TextBlock Text="{Binding nutrient_levels.fat}"
+                                                Margin="2"/>
+                                        </StackPanel>
+
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="saturated fat:" FontWeight="Bold" 
+                                                Margin="2" />
+                                            <TextBlock Text="{Binding nutrient_levels.saturated_fat}"
+                                                Margin="2"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Border>
                             </StackPanel>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
-
             </StackPanel>
+            
         </Grid>
     </ScrollViewer>
 </Window>

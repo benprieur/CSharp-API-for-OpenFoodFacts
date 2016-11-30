@@ -27,6 +27,9 @@ namespace WpfOpenFoodFacts
         // Combo choices
         List<string> m_comboFacets;
 
+        // Cache
+        Dictionary<string, ObservableCollection<Tags>> m_cache;
+
         // First criteria value
         ObservableCollection<Tags> m_tags1;
         Tags m_tag1;
@@ -59,10 +62,15 @@ namespace WpfOpenFoodFacts
 
             m_off = new RequestProduct();
             ComboFacets = Enum.GetNames(typeof(Facets)).ToList();
+            m_cache = new Dictionary<string, ObservableCollection<Tags>>();
+          
             Products = new ObservableCollection<Product>();
             this.DataContext = this;
         }
 
+        /// <summary>
+        /// BuildCache
+        /// </summary>
         /// <summary>
         /// get_product_Click
         /// </summary>
@@ -301,7 +309,11 @@ namespace WpfOpenFoodFacts
             IsWindowActive = false;
             ObservableCollection<Tags> result = await Task.Run(() =>
             {
-                return m_off.get_data_deserialize(selection);
+                if (m_cache.ContainsKey(selection) == false)
+                {
+                    m_cache.Add(selection, m_off.get_data_deserialize(selection));
+                }
+                return m_cache[selection];
             });
             Tags1 = result;
             autoCompleteBox1.Text = "";
@@ -321,7 +333,11 @@ namespace WpfOpenFoodFacts
             IsWindowActive = false;
             ObservableCollection<Tags> result = await Task.Run(() =>
             {
-                return m_off.get_data_deserialize(selection);
+                if (m_cache.ContainsKey(selection) == false)
+                {
+                    m_cache.Add(selection, m_off.get_data_deserialize(selection));
+                }
+                return m_cache[selection];
             });
             Tags2 = result;
             autoCompleteBox2.Text = "";
