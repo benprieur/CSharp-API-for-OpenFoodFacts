@@ -45,7 +45,7 @@ namespace OpenFoodFactsAPI
                         catch (Exception ex)
                         {
                             string message = ex.Message.ToString();
-                            property.SetValue(product, new List<string>());
+                            property.SetValue(product, null);
                         }
                     }
 
@@ -75,6 +75,59 @@ namespace OpenFoodFactsAPI
                     //
                     //////////////////////////////////////////////
 
+                    else if (prop.PropertyType == typeof(Nutriments))
+                    {
+                        try
+                        {
+                            Nutriments result = JsonConvert.DeserializeObject<Nutriments>(jtoken[propName].ToString());
+                            property.SetValue(product, result);
+                        }
+                        catch (Exception ex)
+                        {
+                            string message = ex.Message.ToString();
+                            property.SetValue(product, null);
+                        }
+                    }
+
+                    //////////////////////////////////////////////
+                    //
+                    // NutrientLevels
+                    //
+                    //////////////////////////////////////////////
+
+                    else if (prop.PropertyType == typeof(NutrientLevels))
+                    {
+                        try
+                        {
+                            NutrientLevels result = JsonConvert.DeserializeObject<NutrientLevels>(jtoken[propName].ToString());
+                            property.SetValue(product, result);
+                        }
+                        catch (Exception ex)
+                        {
+                            string message = ex.Message.ToString();
+                            property.SetValue(product, null);
+                        }
+                    }
+
+                    //////////////////////////////////////////////
+                    //
+                    // List<Ingredient>
+                    //
+                    //////////////////////////////////////////////
+
+                    else if (prop.PropertyType == typeof(List<Ingredient>))
+                    {
+                        try
+                        {
+                            List<Ingredient> result = JsonConvert.DeserializeObject<List<Ingredient>>(jtoken[propName].ToString());
+                            property.SetValue(product, result);
+                        }
+                        catch (Exception ex)
+                        {
+                            string message = ex.Message.ToString();
+                            property.SetValue(product, null);
+                        }
+                    }
 
                     //////////////////////////////////////////////
                     //

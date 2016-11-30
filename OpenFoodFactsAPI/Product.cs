@@ -40,7 +40,6 @@ namespace OpenFoodFactsAPI
         public string nutrition_grade_fr { get; set; }
         public string image_ingredients_thumb_url { get; set; }
         public string allergens { get; set; }
-        public int additives_old_n { get; set; }
         public string stores { get; set; }
         public string image_small_url { get; set; }
         public string image_front_small_url { get; set; }
@@ -81,6 +80,8 @@ namespace OpenFoodFactsAPI
         public string informers { get; set; }
         public string lang { get; set; }
         public string pnns_groups_2 { get; set; }
+        public string ingredients_text_debug { get; set; }
+        public string nutrition_score_debug { get; set; }
 
         public List<string> informers_tags { get; set; }
         public List<string> brands_tags { get; set; }
@@ -122,6 +123,18 @@ namespace OpenFoodFactsAPI
         public List<string> packaging_tags { get; set; }
         public List<string> checkers_tags { get; set; }
         public List<string> additives_prev_tags { get; set; }
+        public List<string> states_hierarchy { get; set; }
+        public List<string> categories_hierarchy { get; set; }
+        public List<string> traces_hierarchy { get; set; }
+        public List<string> allergens_hierarchy { get; set; }
+        public List<string> countries_hierarchy { get; set; }
+        public List<string> labels_hierarchy { get; set; }
+        public List<string> languages_hierarchy { get; set; }
+        public List<string> labels_prev_hierarchy { get; set; }
+        public List<string> categories_prev_hierarchy { get; set; }
+        public List<string> _keywords { get; set; }
+        public List<string> ingredients_debug { get; set; }
+        public List<string> ingredients_ids_debug { get; set; }
 
         public int unique_scans_n { get; set; }
         public int ingredients_from_or_that_may_be_from_palm_oil_n { get; set; }
@@ -133,25 +146,12 @@ namespace OpenFoodFactsAPI
         public int new_additives_n { get; set; }
         public int scans_n { get; set; }
         public int additives_prev_n { get; set; }
+        public int additives_old_n { get; set; }
 
-        //public List<Nutriments> nutriments { get; set; }
-        //public List<NutrientLevels> nutrient_levels { get; set; }
+        public Nutriments nutriments { get; set; }
+        public NutrientLevels nutrient_levels { get; set; }
 
-        //public string _keywords { get; set; }
-        //public string ingredients_debug { get; set; }
-        //public string ingredients_text_debug { get; set; }
-        //public string nutrition_score_debug { get; set; }
-        //public string ingredients_ids_debug { get; set; }
-
-        //public string states_hierarchy { get; set; }
-        //public string categories_hierarchy { get; set; }
-        //public string traces_hierarchy { get; set; }
-        //public string allergens_hierarchy { get; set; }
-        //public string countries_hierarchy { get; set; }
-        //public string labels_hierarchy { get; set; }
-        //public string languages_hierarchy { get; set; }
-        //public string labels_prev_hierarchy { get; set; }
-        //public string categories_prev_hierarchy { get; set; }
+        public List<Ingredient> ingredients { get; set; }
     }
 
     public class NutrientLevels
@@ -177,44 +177,44 @@ namespace OpenFoodFactsAPI
         public string energy_value { get; set; }
         public string nutrition_score_fr { get; set; }
         public string carbohydrates_value { get; set; }
-        public double saturated_fat_serving { get; set; }
-        public double fat_serving { get; set; }
+        public string saturated_fat_serving { get; set; }
+        public string fat_serving { get; set; }
         public string fat_value { get; set; }
         public string proteins_unit { get; set; }
-        public double sodium_100g { get; set; }
+        public string sodium_100g { get; set; }
         public string saturated_fat_unit { get; set; }
         public string energy_serving { get; set; }
         public string sodium_value { get; set; }
-        public double proteins_serving { get; set; }
+        public string proteins_serving { get; set; }
         public string nutrition_score_uk { get; set; }
-        public double saturated_fat { get; set; }
+        public string saturated_fat { get; set; }
         public string proteins_value { get; set; }
-        public double sodium_serving { get; set; }
-        public double salt_serving { get; set; }
-        public double sugars_serving { get; set; }
+        public string sodium_serving { get; set; }
+        public string salt_serving { get; set; }
+        public string sugars_serving { get; set; }
         public string fat_unit { get; set; }
-        public double saturated_fat_100g { get; set; }
-        public double sodium { get; set; }
+        public string saturated_fat_100g { get; set; }
+        public string sodium { get; set; }
         public string nutrition_score_fr_100g { get; set; }
         public string sugars_unit { get; set; }
-        public double proteins { get; set; }
-        public double sugars_100g { get; set; }
-        public double proteins_100g { get; set; }
-        public double carbohydrates { get; set; }
+        public string proteins { get; set; }
+        public string sugars_100g { get; set; }
+        public string proteins_100g { get; set; }
+        public string carbohydrates { get; set; }
         public string saturated_fat_value { get; set; }
-        public double carbohydrates_100g { get; set; }
+        public string carbohydrates_100g { get; set; }
         public string energy_100g { get; set; }
-        public double fat_100g { get; set; }
+        public string fat_100g { get; set; }
         public string energy { get; set; }
         public string carbohydrates_unit { get; set; }
-        public double salt { get; set; }
-        public double fat { get; set; }
+        public string salt { get; set; }
+        public string fat { get; set; }
         public string salt_unit { get; set; }
-        public double carbohydrates_serving { get; set; }
+        public string carbohydrates_serving { get; set; }
         public string sugars_value { get; set; }
         public string energy_unit { get; set; }
         public string nutrition_score_uk_100g { get; set; }
-        public double sugars { get; set; }
-        public double salt_100g { get; set; }
+        public string sugars { get; set; }
+        public string salt_100g { get; set; }
     }
 }
