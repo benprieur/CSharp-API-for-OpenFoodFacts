@@ -3,7 +3,6 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Data;
 
 namespace OpenFoodFactsAPI
 {
@@ -14,6 +13,9 @@ namespace OpenFoodFactsAPI
         public const string PRODUCT_TAG = "product";
         public const string PRODUCTS_TAG = "products";
         public const string TAGS = "tags";
+        public const string PAGE = "page";
+        public const string PAGE_SIZE = "page_size";
+        public const string COUNT = "count";
 
         public int page { get; set; }
         public int page_size { get; set; }
@@ -79,7 +81,7 @@ namespace OpenFoodFactsAPI
             // page
             try
             {
-                page = (int)jObject["page"];
+                page = (int)jObject[PAGE];
             }
             catch
             {
@@ -88,7 +90,7 @@ namespace OpenFoodFactsAPI
             // page_size
             try
             {
-                page_size = (int)jObject["page_size"];
+                page_size = (int)jObject[PAGE_SIZE];
             }
             catch
             {
@@ -97,7 +99,7 @@ namespace OpenFoodFactsAPI
             // count
             try
             {
-                count = (int)jObject["count"];
+                count = (int)jObject[COUNT];
             }
             catch
             {
@@ -200,7 +202,7 @@ namespace OpenFoodFactsAPI
                 case Facets.traces:
                     return Facet.trace;
             }
-            throw new Exception("This value is not relevant: " + facets.ToString());
+            throw new Exception("current value is not relevant: " + facets.ToString());
         }
     }
 }
