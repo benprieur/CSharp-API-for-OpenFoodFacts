@@ -90,7 +90,7 @@ namespace WpfOpenFoodFacts
 
                 Page = m_off.page;
                 Page_size = m_off.page_size;
-                Count = m_off.count;
+                Count = 1;
             }
             catch (Exception ex)
             {
@@ -376,9 +376,9 @@ namespace WpfOpenFoodFacts
                 m_uniqueProductView.Close();
             }
             m_uniqueProductView = new ProductView();
+            m_uniqueProductView.Product = SelectedProduct;
             m_uniqueProductView.Title = SelectedProduct.product_name + " (" + SelectedProduct.id + ")";
-            m_uniqueProductView.DataContext = SelectedProduct;
-            m_uniqueProductView.ShowDialog();
+            m_uniqueProductView.Show();
         }
     }
 }

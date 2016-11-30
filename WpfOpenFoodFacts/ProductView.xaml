@@ -10,8 +10,46 @@
 		HorizontalAlignment="Center"
         WindowStartupLocation="CenterScreen"        
         Icon="off.ico"
-        Height="600" Width="600">
-    <Grid>
-        
-    </Grid>
+        Height="600" Width="1000">
+
+    <ScrollViewer x:Name="Scrolling"
+                VerticalScrollBarVisibility="Auto"
+                HorizontalScrollBarVisibility="Auto" 
+                HorizontalAlignment="Stretch"
+                Margin="10">
+
+        <Grid VerticalAlignment="Top" HorizontalAlignment="Left">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
+
+                <Button Click="Button_Click" 
+                        Content="Get!" 
+                        HorizontalAlignment="Left"
+                        Width="150" Height="25" Margin="5" />
+
+                <StackPanel Orientation="Horizontal">
+                    <WrapPanel Orientation="Vertical" 
+                           Width="250"    
+                           Margin="5"
+                           Name="wp1" />
+                    <WrapPanel Orientation="Vertical" 
+                           Width="250"    
+                           Margin="5"
+                           Name="wp2" />
+                    <WrapPanel Orientation="Vertical" 
+                           Width="250"    
+                           Margin="5"
+                           Name="wp3" />
+                    <WrapPanel Orientation="Vertical"                            
+                           Margin="5"
+                           Name="wp4" />
+                    <WrapPanel Orientation="Vertical" 
+                           Width="250"                              
+                           Margin="5"
+                           Name="wp5" />
+                </StackPanel>
+
+            </StackPanel>
+        </Grid>
+
+    </ScrollViewer>
 </Window>

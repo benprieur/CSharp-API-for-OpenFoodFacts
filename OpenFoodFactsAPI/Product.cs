@@ -3,7 +3,7 @@ using System.ComponentModel;
 
 namespace OpenFoodFactsAPI
 {
-    public class Product : INotifyPropertyChanged
+    public class Product
     {
         public string product_name { get; set; }
         public string id { get; set; }
@@ -147,15 +147,6 @@ namespace OpenFoodFactsAPI
         public NutrientLevels nutrient_levels { get; set; }
 
         public List<Ingredient> ingredients { get; set; }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged(string propertyName)
-        {
-            if (this.PropertyChanged != null)
-            {
-                this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
     }
 
     public class NutrientLevels

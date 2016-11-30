@@ -198,7 +198,7 @@
                                         <StackPanel Orientation="Horizontal">
                                             <TextBlock Text="Brands:" 
                                                Margin="2" />
-                                            <TextBlock Text="{Binding brands_tags}"
+                                            <TextBlock Text="{Binding brands}"
                                                Margin="2" />
                                         </StackPanel>
 

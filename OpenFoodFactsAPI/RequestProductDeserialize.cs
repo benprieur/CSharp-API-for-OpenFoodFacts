@@ -135,7 +135,7 @@ namespace OpenFoodFactsAPI
                     //
                     //////////////////////////////////////////////
 
-                    if (prop.PropertyType == typeof(string))
+                    else if (prop.PropertyType == typeof(string))
                     {
                         try
                         {
