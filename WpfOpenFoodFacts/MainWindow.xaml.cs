@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 
 namespace WpfOpenFoodFacts
 {
@@ -14,6 +15,7 @@ namespace WpfOpenFoodFacts
     /// </summary>
     public partial class MainWindow : Window, INotifyPropertyChanged, IDisposable
     {
+        ProductView m_uniqueProductView;
         RequestProduct m_off;
 
         // Meta data
@@ -22,7 +24,7 @@ namespace WpfOpenFoodFacts
         int m_count;
         
         ObservableCollection<Product> m_products;
-        // Product m_product;
+        Product m_selectedProduct;
 
         // Combo choices
         List<string> m_comboFacets;
@@ -55,6 +57,8 @@ namespace WpfOpenFoodFacts
         /// </summary>
         public MainWindow()
         {
+            m_uniqueProductView = null;
+
             Application.Current.MainWindow.WindowState = WindowState.Maximized;
             InitializeComponent();
 
@@ -149,6 +153,22 @@ namespace WpfOpenFoodFacts
             {
                 m_products = value;
                 OnPropertyChanged("Products");
+            }
+        }
+
+        /// <summary>
+        /// SelectedProduct (binding)
+        /// </summary>
+        public Product SelectedProduct
+        {
+            get
+            {
+                return m_selectedProduct;
+            }
+            set
+            {
+                m_selectedProduct = value;
+                OnPropertyChanged("SelectedProduct");
             }
         }
 
@@ -342,6 +362,23 @@ namespace WpfOpenFoodFacts
             Tags2 = result;
             autoCompleteBox2.Text = "";
             IsWindowActive = true;
+        }
+
+        /// <summary>
+        /// ListBox_MouseDoubleClick
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ListBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (m_uniqueProductView != null)
+            {
+                m_uniqueProductView.Close();
+            }
+            m_uniqueProductView = new ProductView();
+            m_uniqueProductView.Title = SelectedProduct.product_name + " (" + SelectedProduct.id + ")";
+            m_uniqueProductView.DataContext = SelectedProduct;
+            m_uniqueProductView.ShowDialog();
         }
     }
 }

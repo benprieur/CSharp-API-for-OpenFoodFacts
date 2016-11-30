@@ -154,13 +154,15 @@
                 </Border>
 
                 <ListBox ItemsSource="{Binding Products}"
+                     SelectedItem="{Binding Path=SelectedProduct, Mode=TwoWay}"
                      BorderBrush="#c0392b"
                      BorderThickness="3,3,3,3"
                      Height="600"
                      ScrollViewer.HorizontalScrollBarVisibility="Auto"
-                     ScrollViewer.VerticalScrollBarVisibility="Visible"  
+                     ScrollViewer.VerticalScrollBarVisibility="Visible"
+                     MouseDoubleClick="ListBox_MouseDoubleClick"    
                      Margin="2">
-
+                            
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
