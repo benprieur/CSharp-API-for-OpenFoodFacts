@@ -21,11 +21,38 @@
         <Grid VerticalAlignment="Top" HorizontalAlignment="Left">
             <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
 
-                <Button Click="Button_Click" 
-                        Content="Get!" 
-                        HorizontalAlignment="Left"
-                        Width="150" Height="25" Margin="5" />
+                <StackPanel Orientation="Horizontal">
 
+                    <Button Click="Button_Click" 
+                            Content="Get!" 
+                            HorizontalAlignment="Left"
+                            Width="150" Height="25" Margin="2" />
+
+                    <TextBlock Height="25" 
+                               FontWeight="Bold"
+                               Text="Login:" />
+
+                    <TextBox Width="120" 
+                             Height="25" 
+                             Name="UserName" 
+                             Margin="2" />
+
+                    <TextBlock Height="25" 
+                               FontWeight="Bold"
+                               Text="Password:" />
+
+                    <PasswordBox Width="120" 
+                             Height="25" 
+                             Name="Pwd" 
+                             Margin="2" />
+
+                    <Button Click="Save_Click" 
+                            Content="Set!" 
+                            HorizontalAlignment="Left"
+                            Width="150" Height="25" Margin="2"  />
+
+                </StackPanel>
+                
                 <StackPanel Orientation="Horizontal">
                     <WrapPanel Orientation="Vertical" 
                            Width="250"    

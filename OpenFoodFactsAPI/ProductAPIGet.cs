@@ -6,7 +6,7 @@ using System.Collections.ObjectModel;
 
 namespace OpenFoodFactsAPI
 {
-    public partial class RequestProduct
+    public partial class ProductAPI
     {
         public const string PREFIX_URL = "api/v0/product/";
         public const string SLASH = "/";

@@ -16,7 +16,7 @@ namespace WpfOpenFoodFacts
     public partial class MainWindow : Window, INotifyPropertyChanged, IDisposable
     {
         ProductView m_uniqueProductView;
-        RequestProduct m_off;
+        ProductAPI m_off;
 
         // Meta data
         int m_page;
@@ -64,7 +64,7 @@ namespace WpfOpenFoodFacts
 
             m_isActive = true;
 
-            m_off = new RequestProduct();
+            m_off = new ProductAPI();
             ComboFacets = Enum.GetNames(typeof(Facets)).ToList();
             m_cache = new Dictionary<string, ObservableCollection<Tags>>();
           

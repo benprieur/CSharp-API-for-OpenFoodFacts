@@ -6,7 +6,7 @@ using System.Reflection;
 
 namespace OpenFoodFactsAPI
 {
-    public partial class RequestProduct
+    public partial class ProductAPI
     {
         /// <summary>
         /// Deserialize

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace WpfOpenFoodFacts
@@ -67,12 +68,25 @@ namespace WpfOpenFoodFacts
                         wp1.Children.Add(imgVal);
                     }
                     else
-                    { 
-                        TextBox tbVal = new TextBox();
-                        tbVal.TextWrapping = TextWrapping.Wrap;
-                        tbVal.MaxWidth = 250;
-                        tbVal.Text = result;
-                        wp1.Children.Add(tbVal);
+                    {
+                        if (propName != "product_name")
+                        {
+                            TextBlock tbVal = new TextBlock();
+                            tbVal.TextWrapping = TextWrapping.Wrap;
+                            tbVal.MaxWidth = 250;
+                            tbVal.Text = result;
+                            wp1.Children.Add(tbVal);
+                        }
+                        else
+                        {
+                            TextBox tbVal = new TextBox();
+                            tbVal.Foreground = Brushes.Red;
+                            tbVal.BorderBrush = Brushes.Red;
+                            tbVal.TextWrapping = TextWrapping.Wrap;
+                            tbVal.MaxWidth = 250;
+                            tbVal.Text = result;
+                            wp1.Children.Add(tbVal);
+                        }
                     }
                 }
                 ////////////////////////////////////////////
@@ -91,7 +105,7 @@ namespace WpfOpenFoodFacts
                     tb.Text = propName + ": ";
                     wp2.Children.Add(tb);
 
-                    TextBox tbVal = new TextBox();
+                    TextBlock tbVal = new TextBlock();
                     tbVal.TextWrapping = TextWrapping.Wrap;
                     tbVal.MaxWidth = 250;
                     tbVal.Text = result;
@@ -113,7 +127,7 @@ namespace WpfOpenFoodFacts
                     tb.Text = propName + ": ";
                     wp3.Children.Add(tb);
 
-                    TextBox tbVal = new TextBox();
+                    TextBlock tbVal = new TextBlock();
                     tbVal.TextWrapping = TextWrapping.Wrap;
                     tbVal.MaxWidth = 250;
                     tbVal.Text = result;
@@ -138,7 +152,7 @@ namespace WpfOpenFoodFacts
 
                         var val = propNL.GetValue(nutrientLevels);
                         string result = (string)val;
-                        TextBox tbVal = new TextBox();
+                        TextBlock tbVal = new TextBlock();
                         tbVal.TextWrapping = TextWrapping.Wrap;
                         tbVal.MaxWidth = 250;
                         tbVal.Text = result;
@@ -164,7 +178,7 @@ namespace WpfOpenFoodFacts
 
                         var val = propNL.GetValue(nutrientLevels);
                         string result = (string)val;
-                        TextBox tbVal = new TextBox();
+                        TextBlock tbVal = new TextBlock();
                         tbVal.TextWrapping = TextWrapping.Wrap;
                         tbVal.MaxWidth = 250;
                         tbVal.Text = result;
@@ -173,6 +187,16 @@ namespace WpfOpenFoodFacts
                 }
 
             }
+        }
+
+        /// <summary>
+        /// Save_Click
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Save_Click(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }
