@@ -377,6 +377,7 @@ namespace WpfOpenFoodFacts
             }
             m_uniqueProductView = new ProductView();
             m_uniqueProductView.Product = SelectedProduct;
+            m_uniqueProductView.OFF = m_off;
             m_uniqueProductView.Title = SelectedProduct.product_name + " (" + SelectedProduct.id + ")";
             m_uniqueProductView.Show();
         }

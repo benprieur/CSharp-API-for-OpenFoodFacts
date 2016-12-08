@@ -17,7 +17,8 @@ namespace WpfOpenFoodFacts
         public const string _URL = "_url";
         public const string TYPE_IMG = "type_img";
          
-        public Product Product { get; set;}
+        public Product Product { get; set; }
+        public ProductAPI OFF;
 
         public ProductView()
         {
@@ -196,7 +197,12 @@ namespace WpfOpenFoodFacts
         /// <param name="e"></param>
         private void Save_Click(object sender, RoutedEventArgs e)
         {
-            
+            OFF.clear_wfacets();
+            OFF.add_wfacet("product_name", "Petit salé aux lentilles");
+            OFF.Login = Login.Text;
+            OFF.Code = Product.id;
+            OFF.Pwd = Pwd.Password;
+            MessageBox.Show(OFF.set_product());
         }
     }
 }

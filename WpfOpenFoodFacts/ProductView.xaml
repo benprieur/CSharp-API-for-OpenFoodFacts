@@ -34,7 +34,7 @@
 
                     <TextBox Width="120" 
                              Height="25" 
-                             Name="UserName" 
+                             Name="Login" 
                              Margin="2" />
 
                     <TextBlock Height="25" 
